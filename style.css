@@ -1,3 +1,8 @@
-h1, h2 {
-  font-family: Lato;
+#main,
+html,
+body {
+  width: 100%;
+}
+#main {
+  height: 400px;
 }
