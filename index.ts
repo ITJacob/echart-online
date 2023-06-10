@@ -12,10 +12,10 @@ const input = document.querySelector('input');
 input.addEventListener('change', convertFile);
 
 async function convertFile(e) {
-  const file: Blob = e.target.files[0];
+  const file: File = e.target.files[0];
   if (!file) return;
   const result = await readFile(file);
-  alert(result[0][0]);
+  draw(file, result);
 }
 
 function readFile(file: Blob) {
@@ -23,34 +23,31 @@ function readFile(file: Blob) {
     const reader = new FileReader();
     reader.readAsText(file, 'shift_jis');
     reader.onloadend = () => {
-      const lines = (reader.result as string).split('\n').slice(4);
-      const header = lines[0].split(',').filter((l) => l); // 除去空列
+      // 除去首尾4行无用数据
+      const lines = (reader.result as string).split('\n').slice(4, -4);
       const content = lines
-        // 除去没有表头的空列
-        .map((l) => l.split(','));
-      // 除去没有内容的空行
-      // // 表头和内容拼接，二维数组
-      // const result = [header].concat(content);
+        // 除去每行首尾的双引号，以逗号分割
+        .map((l) => l.slice(1, -1).split('","'));
       res(content);
     };
   });
 }
 
-// 绘制图表
-myChart.setOption({
-  title: {
-    text: '李祥的数据',
-  },
-  tooltip: {},
-  xAxis: {
-    data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子'],
-  },
-  yAxis: {},
-  series: [
-    {
-      name: '销量',
-      type: 'bar',
-      data: [5, 20, 36, 10, 10, 20],
+function draw(file: File, data: string[][]) {
+  // const d = data.slice(1);
+  // 绘制图表
+  myChart.setOption({
+    title: {
+      text: file.name,
     },
-  ],
-});
+    tooltip: {},
+    dataset: {
+      source: data.map((d) => [d[0], d[5]]),
+    },
+    xAxis: {
+      type: 'category',
+    },
+    yAxis: {},
+    series: [{ type: 'bar' }],
+  });
+}
