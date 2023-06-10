@@ -1,7 +1,16 @@
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <div>
-  <label for="data">原始数据：</label>
-  <input id="data" type="file" (change)="convertFile()" #data />
+  <label for="keyMap">对照文件：</label>
+  <input id="keyMap" type="file" #keyMap />
+</div>
+<br />
+<div>
+  <label for="data">销售数据：</label>
+  <input id="data" type="file" #data multiple />
+</div>
+<br />
+<div>
+  <label for="ada">广告数据：</label>
+  <input id="ada" type="file" #ada multiple />
 </div>
 <br />
 <div id="main"></div>
