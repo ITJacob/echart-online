@@ -12,18 +12,17 @@ function convertFile(res) {
 }
 
 function readFile(file: Blob) {
-  return new Promise<string[]>((res) => {
+  return new Promise<string>((res) => {
     const reader = new FileReader();
     reader.readAsText(file, 'shift_jis');
     reader.onloadend = () => {
-      const lines = (reader.result as string).split('\n');
-      res(lines);
+      res(reader.result as string);
     };
   });
 }
 
 export function getFiles(id: string) {
-  return new Promise<string[][]>((res) => {
+  return new Promise<string[]>((res) => {
     const input = document.getElementById(id);
     input.addEventListener('change', convertFile(res));
   });
