@@ -2,9 +2,10 @@ import { getFiles } from './tools';
 
 export async function getKeyMap() {
   const files = await getFiles('keyMap');
+  const file = files[Object.keys(files)[0]];
   // 文件分行
   // 以逗号隔开，取前两项
-  return files[0].split('\r\n').reduce(
+  return file.split('\r\n').reduce(
     (pre, cur, i) => {
       const [l, s] = cur
         .split(',')
