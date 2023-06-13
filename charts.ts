@@ -18,12 +18,12 @@ export function draw(this: echarts.ECharts, name: string, data: string[][]) {
     },
     tooltip: {},
     dataset: {
-      source: data.map((d) => [d[0], d[5]]),
+      source: data,
     },
     xAxis: {
       type: 'category',
     },
     yAxis: {},
-    series: [{ type: 'bar' }],
+    series: [{ type: 'bar' }, { type: 'bar' }, { type: 'bar' }],
   });
 }

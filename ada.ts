@@ -9,6 +9,9 @@ export async function getAda() {
     f
       .split('\n')
       .slice(6, -1)
-      .map((l) => l.slice(1, -1).split('","'))
+      .map((l) => {
+        const arr = l.slice(1, -1).split('","');
+        return [arr[3], arr[8], arr[16]];
+      })
   );
 }
