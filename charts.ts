@@ -1,17 +1,20 @@
 import * as echarts from 'echarts';
 
-// 基于准备好的dom，初始化echarts实例
-var myChart = echarts.init(document.getElementById('main'));
-window.addEventListener('resize', function () {
-  myChart.resize();
-});
+export function init(id: string) {
+  // 基于准备好的dom，初始化echarts实例
+  const myChart = echarts.init(document.getElementById(id));
+  window.addEventListener('resize', function () {
+    myChart.resize();
+  });
+  return myChart;
+}
 
-function draw(file: File, data: string[][]) {
+export function draw(this: echarts.ECharts, name: string, data: string[][]) {
   // const d = data.slice(1);
   // 绘制图表
-  myChart.setOption({
+  this.setOption({
     title: {
-      text: file.name,
+      text: name,
     },
     tooltip: {},
     dataset: {
