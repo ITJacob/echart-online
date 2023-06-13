@@ -24,6 +24,11 @@ export function draw(this: echarts.ECharts, name: string, data: string[][]) {
       type: 'category',
     },
     yAxis: {},
-    series: [{ type: 'bar' }, { type: 'bar' }, { type: 'bar' }],
+    series: [
+      { type: 'bar' },
+      { type: 'bar' },
+      { type: 'bar' },
+      { type: 'bar' },
+    ],
   });
 }

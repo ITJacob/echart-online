@@ -1,18 +1,18 @@
-export function getSelectValue(values: { [s: string]: string[] }) {
-  return new Promise<string>((res) => {
-    const select = document.getElementById('item-select');
-    select.addEventListener('change', (e) => {
-      res((e.target as HTMLSelectElement).value);
-    });
+// 商品短号选择框
+export function initSelectValue(values: { [s: string]: string[] }, cb) {
+  const select = document.getElementById('item-select');
+  Object.keys(values).sort().forEach(key => {
+    let option = document.createElement('option');
+    option.setAttribute('value', key);
 
-    for (let key in values) {
-      let option = document.createElement('option');
-      option.setAttribute('value', key);
+    let optionText = document.createTextNode(key);
+    option.appendChild(optionText);
 
-      let optionText = document.createTextNode(key);
-      option.appendChild(optionText);
-
-      select.appendChild(option);
-    }
+    select.appendChild(option);
   });
+
+  select.addEventListener('change', (e) => {
+    cb((e.target as HTMLSelectElement).value);
+  });
+
 }

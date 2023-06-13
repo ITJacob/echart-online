@@ -1,5 +1,6 @@
 import { getFiles } from './tools';
 
+// 销售数据
 export async function getData() {
   const files = await getFiles('data');
   const result = {};

@@ -26,6 +26,7 @@ function readFile(file: Blob) {
   });
 }
 
+// 文件读取器
 export function getFiles(id: string) {
   return new Promise<{ [file: string]: string }>((res) => {
     const input = document.getElementById(id);
