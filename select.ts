@@ -18,9 +18,16 @@ export function initSelectValue(values: { [s: string]: string[] }, cb) {
 
   select.addEventListener('input', (e: InputEvent) => {
     // cb((e.target as HTMLSelectElement).value);
+    let scrollTop;
     for (let i of list.children) {
-      const res = i.textContent.includes((e.target as HTMLInputElement).value);
+      const res = i.textContent.includes(
+        (e.target as HTMLInputElement).value.toUpperCase()
+      );
       (i as HTMLElement).style.opacity = res ? '1' : '0.4';
+      if (!scrollTop && res) {
+        scrollTop = (i as HTMLElement).offsetTop;
+        list.scrollTop = scrollTop;
+      }
     }
   });
   list.addEventListener('click', (e) => {
