@@ -16,6 +16,7 @@ export function draw(this: echarts.ECharts, name: string, data: string[][]) {
     title: {
       text: name,
     },
+    legend: {},
     tooltip: {},
     dataset: {
       source: data,
@@ -25,10 +26,11 @@ export function draw(this: echarts.ECharts, name: string, data: string[][]) {
     },
     yAxis: {},
     series: [
-      { type: 'bar' },
-      { type: 'bar' },
-      { type: 'bar' },
-      { type: 'bar' },
+      { type: 'bar', label: { show: true } },
+      { type: 'bar', label: { show: true } },
+      { type: 'line', label: { show: true } },
+      { type: 'bar', label: { show: true } },
+      { type: 'bar', label: { show: true } },
     ],
   });
 }
