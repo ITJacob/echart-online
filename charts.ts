@@ -26,11 +26,11 @@ export function draw(this: echarts.ECharts, name: string, data: string[][]) {
     },
     yAxis: {},
     series: [
-      { type: 'bar', label: { show: true } },
-      { type: 'bar', label: { show: true } },
-      { type: 'line', label: { show: true } },
-      { type: 'bar', label: { show: true } },
-      { type: 'bar', label: { show: true } },
+      { type: 'bar', label: { show: true, position: 'top' } },
+      { type: 'bar', label: { show: true, position: 'top' } },
+      { type: 'line', label: { show: true, position: 'top' } },
+      { type: 'bar', label: { show: true, position: 'top' } },
+      { type: 'bar', label: { show: true, position: 'top' } },
     ],
   });
 }
