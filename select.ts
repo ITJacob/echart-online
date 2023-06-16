@@ -19,8 +19,8 @@ export function initSelectValue(values: { [s: string]: string[] }, cb) {
   select.addEventListener('input', (e: InputEvent) => {
     // cb((e.target as HTMLSelectElement).value);
     for (let i of list.children) {
-      const res = i.textContent.includes(e.data);
-      (i as HTMLElement).style.opacity = res ? '1' : '0.6';
+      const res = i.textContent.includes((e.target as HTMLInputElement).value);
+      (i as HTMLElement).style.opacity = res ? '1' : '0.4';
     }
   });
   list.addEventListener('click', (e) => {
