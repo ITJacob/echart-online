@@ -24,7 +24,7 @@ async function main() {
     const selectAda = getItemData(ada, 0, key);
     const d = dataProcess(selectData, selectAda);
     console.log(d);
-    draw.call(mainChart, 'ceshi', d);
+    draw.call(mainChart, '产品销量', d);
   });
 }
 
@@ -38,7 +38,7 @@ function getItemData(data: IFiles, index: number, code: string) {
 
 function dataProcess(data: IFiles, ada: IFiles) {
   const result: (string | number)[][] = [
-    ['时间', '个数', '销售总数', '件数', '广告'],
+    ['时间', '销售个数', '总营业额', '订单件数', '广告费用', '广告产生营业额'],
   ];
 
   for (let time in data) {
@@ -48,9 +48,10 @@ function dataProcess(data: IFiles, ada: IFiles) {
     const _ada = ada[time][0]
       ? ada[time][0].map((d) => Number(d.replaceAll(',', '')))
       : [0, 0];
-    const temp = [time, ..._dada.slice(-3), _ada[1]];
+    const temp = [time, ..._dada.slice(-3), ..._ada.slice(-2)];
     temp[2] = (temp[2] as number) / 1000;
     temp[4] = (temp[4] as number) / 1000;
+    temp[5] = (temp[5] as number) / 1000;
     result.push(temp);
   }
   return result;
