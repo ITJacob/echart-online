@@ -38,7 +38,14 @@ function getItemData(data: IFiles, index: number, code: string) {
 
 function dataProcess(data: IFiles, ada: IFiles) {
   const result: (string | number)[][] = [
-    ['时间', '销售个数', '总营业额', '订单件数', '广告费用', '广告产生营业额'],
+    [
+      '时间',
+      '销售个数',
+      '总营业额(千)',
+      '订单件数',
+      '广告费用(千)',
+      '广告产生营业额(千)',
+    ],
   ];
 
   for (let time in data) {
