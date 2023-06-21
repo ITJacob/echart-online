@@ -10,15 +10,7 @@ export function init(id: string) {
   return myChart;
 }
 
-export function getItemData(data: IFiles, index: number, code: string) {
-  const result = {};
-  for (let time in data) {
-    result[time] = data[time].filter((line) => line[index] === code);
-  }
-  return result;
-}
-
-export function dataProcess(data: IFiles, ada: IFiles) {
+export function dataProcess(data: IFiles) {
   const result: (string | number)[][] = [
     [
       '时间',
