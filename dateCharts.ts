@@ -26,10 +26,7 @@ export function dataProcess(data: IFiles) {
     const _dada = data[time][0]
       ? data[time][0].map((d) => Number(d.replaceAll(',', '')))
       : [0, 0, 0];
-    const _ada = ada[time][0]
-      ? ada[time][0].map((d) => Number(d.replaceAll(',', '')))
-      : [0, 0];
-    const temp = [time, ..._dada.slice(-3), ..._ada.slice(-2)];
+    const temp = [time, ..._dada.slice(-3)];
     temp[2] = (temp[2] as number) / 1000;
     temp[4] = (temp[4] as number) / 1000;
     temp[5] = (temp[5] as number) / 1000;
