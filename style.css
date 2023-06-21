@@ -1,17 +1,23 @@
 html,
 body {
   width: 100%;
+  margin: 0;
 }
+.box {
+  padding: 8px;
+}
+
 .content {
   width: 100%;
   height: 400px;
   margin: 20px 0;
   display: flex;
-  justify-content: space-between;
 }
+
 .date-chart-content {
   height: 100vh;
 }
+
 .item-select-list {
   width: 10%;
   height: 100%;
@@ -19,10 +25,15 @@ body {
   overflow-x: hidden;
   position: relative;
 }
-.date-chart {
-}
+
 #main {
   margin-top: 10px;
   width: 90%;
   height: 400px;
+}
+
+#date-chart {
+  margin-top: 10px;
+  width: 90%;
+  height: 100vh;
 }
