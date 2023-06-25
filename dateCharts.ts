@@ -10,53 +10,59 @@ export function init(id: string) {
   return myChart;
 }
 
-export function dataProcess(data: IFiles) {
-  const result: (string | number)[][] = [
-    [
-      '时间',
-      '销售个数',
-      '总营业额(千)',
-      '订单件数',
-      '广告费用(千)',
-      '广告产生营业额(千)',
-    ],
+export function dataProcess(data: string[][]) {
+  const sort = (index, isDec = false) =>
+    data
+      .slice(1)
+      .sort(
+        (a, b) =>
+          (Number(a[index].replaceAll(',', '')) -
+            Number(b[index].replaceAll(',', ''))) *
+          (isDec ? 1 : -1) // 正序是从大到小
+      )
+      .slice(0, 20)
+      .map((d) => [d[1], Number(d[index].replaceAll(',', ''))]);
+  const result = [
+    { name: '总营业额', data: sort(4) },
+    { name: '订单件数', data: sort(5) },
+    { name: '销售个数', data: sort(3) },
+    { name: '倒：总营业额', data: sort(4, true) },
+    { name: '倒：订单件数', data: sort(5, true) },
+    { name: '倒：销售个数', data: sort(3, true) },
   ];
 
-  for (let time in data) {
-    const _dada = data[time][0]
-      ? data[time][0].map((d) => Number(d.replaceAll(',', '')))
-      : [0, 0, 0];
-    const temp = [time, ..._dada.slice(-3)];
-    temp[2] = (temp[2] as number) / 1000;
-    temp[4] = (temp[4] as number) / 1000;
-    temp[5] = (temp[5] as number) / 1000;
-    result.push(temp);
-  }
   return result;
 }
 
 export function draw(this: echarts.ECharts, name: string, data: string[][]) {
   // const d = data.slice(1);
   // 绘制图表
+  const _data = data.reverse();
   this.setOption({
     title: {
       text: name,
     },
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: {
+        type: 'shadow',
+      },
+    },
     legend: {},
-    tooltip: {},
-    dataset: {
-      source: data,
-    },
+    grid: {},
     xAxis: {
-      type: 'category',
+      position: 'top',
+      type: 'value',
     },
-    yAxis: {},
+    yAxis: {
+      type: 'category',
+      data: _data.map((d) => d[0]),
+    },
     series: [
-      { type: 'bar', label: { show: true, position: 'top' } },
-      { type: 'bar', label: { show: true, position: 'top' } },
-      { type: 'line', label: { show: true, position: 'top' } },
-      { type: 'bar', label: { show: true, position: 'top' } },
-      { type: 'bar', label: { show: true, position: 'top' } },
+      {
+        type: 'bar',
+        data: _data.map((d) => d[1]),
+      },
     ],
   });
 }

@@ -20,9 +20,6 @@ import { initDateSelectValue } from './dateSelect';
 export type IFiles = { [time: string]: string[][] };
 
 async function main() {
-  const mainChart = mainInit('main');
-  const dateChart = dateInit('date-chart');
-
   const [data, ada, keyMap] = await Promise.all([
     getData(),
     getAda(),
@@ -33,6 +30,7 @@ async function main() {
   console.log(keyMap);
   const [lMap, sMap] = keyMap;
 
+  const mainChart = mainInit('main');
   initSelectValue(sMap, (key) => {
     const selectData = getItemData(data, 1, sMap[key][0]);
     const selectAda = getItemData(ada, 0, key);
@@ -41,11 +39,19 @@ async function main() {
     mainDraw.call(mainChart, '产品销量', d);
   });
 
+  const dateCharts = [];
+  let i = 6;
+  while (i--) {
+    dateCharts[i] = dateInit('date-chart' + i);
+  }
   initDateSelectValue(data, (key) => {
     const selectData = data[key];
     const d = dateDataProcess(selectData);
     console.log(d);
-    dateDraw.call(dateChart, '月销量排行', d);
+    i = 6;
+    while (i--) {
+      dateDraw.call(dateCharts[i], d[i].name, d[i].data);
+    }
   });
 }
 
