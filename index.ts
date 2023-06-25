@@ -50,7 +50,7 @@ async function main() {
     console.log(d);
     i = 6;
     while (i--) {
-      dateDraw.call(dateCharts[i], d[i].name, d[i].data);
+      dateDraw.call(dateCharts[i], d[i].name, d[i].data, lMap);
     }
   });
 }

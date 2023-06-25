@@ -34,7 +34,12 @@ export function dataProcess(data: string[][]) {
   return result;
 }
 
-export function draw(this: echarts.ECharts, name: string, data: string[][]) {
+export function draw(
+  this: echarts.ECharts,
+  name: string,
+  data: string[][],
+  keyMap
+) {
   // const d = data.slice(1);
   // 绘制图表
   const _data = data.reverse();
@@ -49,14 +54,20 @@ export function draw(this: echarts.ECharts, name: string, data: string[][]) {
       },
     },
     legend: {},
-    grid: {},
+    grid: {
+      left: '25%',
+    },
     xAxis: {
       position: 'top',
       type: 'value',
     },
     yAxis: {
       type: 'category',
-      data: _data.map((d) => d[0]),
+      data: _data.map((d) =>
+        keyMap[d[0].toUpperCase()]
+          ? keyMap[d[0].toUpperCase()][0]
+          : d[0].toUpperCase()
+      ),
     },
     series: [
       {
