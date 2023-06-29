@@ -25,9 +25,9 @@ async function main() {
     getAda(),
     getKeyMap(),
   ]);
-  console.log(data);
-  console.log(ada);
-  console.log(keyMap);
+  console.log('销售数据：', data);
+  console.log('广告数据：', ada);
+  console.log('长短号映射（对应数组的第一个）：', keyMap);
   const [lMap, sMap] = keyMap;
 
   const mainChart = mainInit('main');
@@ -35,7 +35,7 @@ async function main() {
     const selectData = getItemData(data, 1, sMap[key][0]);
     const selectAda = getItemData(ada, 0, key);
     const d = dataProcess(selectData, selectAda);
-    console.log(d);
+    console.log('结果：', d);
     mainDraw.call(mainChart, '产品销量', d);
   });
 
@@ -45,9 +45,13 @@ async function main() {
     dateCharts[i] = dateInit('date-chart' + i);
   }
   initDateSelectValue(data, (key) => {
-    const selectData = data[key];
+    const selectData = [];
+    Object.keys(data)
+      .filter((k) => k.startsWith(key))
+      .forEach((k) => selectData.push(...data[k].slice(1)));
+    console.log('选中的数据：', selectData);
     const d = dateDataProcess(selectData);
-    console.log(d);
+    console.log('结果：', d);
     i = 6;
     while (i--) {
       dateDraw.call(dateCharts[i], d[i].name, d[i].data, lMap);

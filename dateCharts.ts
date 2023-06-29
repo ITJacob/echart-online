@@ -13,7 +13,6 @@ export function init(id: string) {
 export function dataProcess(data: string[][]) {
   const sort = (index, isDec = false) =>
     data
-      .slice(1)
       .sort(
         (a, b) =>
           (Number(a[index].replaceAll(',', '')) -
