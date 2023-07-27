@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "tsup ./index.ts || webpack",
-    "start": "npx http-server . --cors"
+    "build-rk": "tsup ./rakuten/index.ts || webpack --config ./rakuten/webpack.config.js",
+    "start": "npx http-server . --cors -o"
   },
   "dependencies": {
     "echarts": "^5.4.2",
